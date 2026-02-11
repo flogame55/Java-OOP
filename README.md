@@ -2,9 +2,13 @@
 ฝึกการเขียนโค้ด Java ในแบบ OOP รายละเอียดดังนี้ 
 
 Scenario 1: Library Management System
+
   Raw Data:
+  
   • A book titled "Java Programming" written by "John Smith". ISBN: 123-456, Price: 450 Baht. Status: Available.
+  
   • A book titled "OOP Concepts" written by "Will Jones". ISBN: 999-888, Price: 590 Baht. Status: Borrowed.
+  
 Instructions:
   1. Design a class named Book.
   2. Identify appropriate Attributes and Methods.
@@ -16,9 +20,13 @@ Instructions:
   6. Submit the upgrade code and sample output
 
 Scenario 2: RPG Game Character
+
 Raw Data:
+
   • A warrior named "Arthur", Level 10, Health Points (HP) 1500, Weapon: "Sword".
+  
   • A mage named "Merlin", Level 12, Health Points (HP) 800, Weapon: "Staff".
+  
 Instructions:
   1. Design a class named Character.
   2. Create objects named warrior and mage.
