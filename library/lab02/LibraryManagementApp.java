@@ -33,20 +33,25 @@ public class LibraryManagementApp {
         books.get(0).checkOut(member1);
         books.get(1).checkOut(member1);
 
-//
-//        System.out.println("Attempting to checkout Book 2 again (Already Borrowed):");
-//        book2.checkOut();
-//
-//        // Challenge: Attempt to checkout a book that is already borrowed
-//        // Demonstrate returnBook() method
-//        System.out.println("\n--- Testing returnBook() Method ---");
-//        System.out.println("\nReturning Book 1:");
-//        book1.returnBook();
-//
-//        // Display final details
-//        System.out.println("\n--- Final Book Information ---");
-//        book1.displayDetails();
-//        book2.displayDetails();
+        System.out.println("\nAttempting to checkout Book 2 again (Already Borrowed):");
+        books.get(1).checkOut(member1);
+
+        // Demonstrate returnBook() method
+        System.out.println("\n--- Testing returnBook() Method ---");
+        System.out.println("\nReturning Book 1:");
+        books.get(0).returnBook(member1);
+
+        // Challenging Scenario: Attempt to borrow more than allowed limit
+        System.out.println("\n--- Challenging Scenario: Borrowing Limit ---");
+        books.get(2).checkOut(member1);
+        books.get(3).checkOut(member1);
+        books.get(4).checkOut(member1); // This should be denied
+
+        // Display final details
+        System.out.println("\n--- Final Book Information ---");
+        for (Book book : books) {
+            book.printSummary();
+        }
 
     }
 }

@@ -4,9 +4,10 @@ public class Healer extends Character {
     private int healBase;
     private int healPower;
 
-    public Healer(String name, int level, int maxHealthPoints, Weapon weapon, int healBase) {
-        super(name, level, maxHealthPoints, weapon, "Healer");
+    public Healer(String name, int level, int maxHealthPoints,int damage,int defense, Weapon weapon, int healBase) {
+        super(name, level, maxHealthPoints, damage , defense ,weapon, "Healer");
         this.healBase = healBase;
+        this.healPower = healBase + (getLevel() * 2);
     }
 
     public int getHealBase() {return healBase;}
@@ -14,7 +15,6 @@ public class Healer extends Character {
     public void setHealBase(int healBase) {this.healBase = healBase;}
 
     public void heal() {
-        this.healPower = this.healBase + (this.getLevel() * 2);
         if (getHealthPoints() >= getMaxHealthPoints()) {
             System.out.println("HealthPoints is already Full!");
             return;
@@ -30,9 +30,8 @@ public class Healer extends Character {
     }
 
     public void healAlly(Character character) {
-        this.healPower = this.healBase + (this.getLevel() * 2);
         if (character.getHealthPoints() >= character.getMaxHealthPoints()) {
-            System.out.println("HealthPoints is already Full!");
+            System.out.println("Target HealthPoints is already Full!");
             return;
         }
         int newHp = character.getHealthPoints() + healPower;

@@ -79,37 +79,44 @@ public class Book {
         System.out.println("- Isbn: " + isbn);
         System.out.println("- Price: " + price);
         System.out.println("- Status: " + status);
-        System.out.println("- Return Due Date: " + returnDueDate);
-        System.out.println();
+        if (returnDueDate == null){
+            System.out.println("- Return Due Date: N/A (Book is available)");
+        }else {
+            System.out.println("- Return Due Date: " + returnDueDate);
+        }
     }
 
     public void printSummary(){
-        System.out.println("Book Id: "+bookId +" Book[Title='"+title+"' , Status='"+status+"']");
+        System.out.println("Book[Title='"+title+"' , Status='"+status+"']");
     }
 
     public void checkOut(Member member){
         if (status.equalsIgnoreCase("Borrowed")){
             System.out.println("Error: Book '" + title + "' is already borrowed and cannot be checked out again.");
-            System.out.println();
             return;
         }
+        if (member.getBorrowTime() >= 3){
+            System.out.println("Member " + member.getMemberName() + " has reached the borrowed limit (3).");
+            return;
+        }
+
         setStatus("Borrowed");
+        member.setBorrowTime(member.getBorrowTime() + 1);
         this.returnDueDate = LocalDate.now().plusDays(14);
-        System.out.println("Book '" + title + "' has been borrwed by ["+ member.getMemberName()+"]");
+        System.out.println("Book '" + title + "' has been checked out successfully.");
+        System.out.println("Book '" + title + "' has been borrwed by ["+member.getMemberName()+"]");
         System.out.println("Return Due Date: " + returnDueDate);
-        System.out.println();
     }
 
-    public void returnBook(){
+    public void returnBook(Member member){
         if (status.equalsIgnoreCase("Available")){
             System.out.println("Error: Book '" + title + "' is Available and be checked out.");
-            System.out.println();
             return;
         }
+        member.setBorrowTime(member.getBorrowTime() - 1);
         setStatus("Available");
         this.returnDueDate = null;
         System.out.println("Book '" + title + "' has been returned successfully.");
-        System.out.println();
 
     }
 }
