@@ -2,7 +2,9 @@
 ฝึกการเขียนโค้ด Java ในแบบ OOP รายละเอียดดังนี้ 
 
 Lab 02: The Interaction
+
 Scenario 1: Association & Composition
+
 Raw Data:
 • A book titled "Java Programming" written by "John Smith". ISBN: 123-456, Price: 450
 Baht. Status: Available. (3 copy)
@@ -30,7 +32,9 @@ on OOP principles and modify the code to enforce this constraint.
 6. Submit the upgrade code and sample output
 
 Scenario 2: The Battle System (RPG Combat)
+
 Concept: Understanding how objects communicate and affect each other's state.
+
 New Requirements:
 1. Reuse classes from Lab1 Scenario 2
 2. Modify the attack() Method: Instead of just printing a message, the method must now
