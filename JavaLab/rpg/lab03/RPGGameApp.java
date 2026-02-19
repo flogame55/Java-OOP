@@ -5,11 +5,13 @@ public class RPGGameApp {
         System.out.println("\n" + "=".repeat(70));
         System.out.println(" SCENARIO 3: RPG BATTLEFIELD - POLYMORPHISM & METHOD OVERRIDING");
         System.out.println("=".repeat(70));
+
     // ==================== CREATE WEAPONS ====================
         System.out.println("\n[STEP 1] Creating Weapons...");
         Weapon swordWeapon = new Weapon("Excalibur", "Melee", 30, "Slash Attack");
         Weapon staffWeapon = new Weapon("Staff of Mysticism", "Magic", 20, "Spell Cast");
         Weapon bowWeapon = new Weapon("Bow of Elven Make", "Ranged", 18, "Precise Shot");
+
     // ==================== CREATE TEAM (POLYMORPHIC LIST) ====================
         System.out.println("\n[STEP 2] Creating Battlefield Team...");
         List<Character> team = new ArrayList<>();
@@ -25,6 +27,7 @@ public class RPGGameApp {
     // Create an enemy
         Character enemy = new Character("Dragon", 15, 2500, 30, 10, new Weapon("Claws", "Melee",
                 25, "Bite"), "Boss");
+
     // ==================== DISPLAY INITIAL STATUS ====================
         System.out.println("\n[STEP 3] Initial Team Status:");
         for (Character member : team) {
@@ -32,8 +35,8 @@ public class RPGGameApp {
         }
         System.out.println("\n--- ENEMY ---");
         enemy.displayCharacterDetails();
-    // ==================== POLYMORPHIC BATTLEFIELD: All Attack Same Enemy
-    // ====================
+
+    // ==================== POLYMORPHIC BATTLEFIELD: All Attack Same Enemy ====================
         System.out.println("\n" + "=".repeat(70));
         System.out.println(" [STEP 4] POLYMORPHIC COMBAT: Team Attacks Enemy");
         System.out.println(" Same method call (attack), DIFFERENT behavior for each type!");
@@ -51,9 +54,11 @@ public class RPGGameApp {
             }
             member.attack(enemy);
         }
+
     // ==================== SHOW ENEMY STATUS AFTER ATTACKS ====================
         System.out.println("\n\n[STEP 5] Enemy Status After Team Attacks:");
         enemy.displayCharacterDetails();
+
     // ==================== ENEMY COUNTERATTACK ====================
         System.out.println("\n[STEP 6] Enemy Counterattacks!");
         System.out.println("\n--- Dragon attacks Warrior ---");
@@ -62,10 +67,12 @@ public class RPGGameApp {
         enemy.attack(mage);
         System.out.println("\n--- Dragon attacks Archer ---");
         enemy.attack(archer);
+
     // ==================== FINAL STATUS ====================
         System.out.println("\n[STEP 7] Final Team Status:");
         for (Character member : team) {
             member.displayCharacterDetails();
         }
+
     }
 }

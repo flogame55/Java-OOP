@@ -17,13 +17,26 @@ public class Warrior extends Character{
 
     @Override
     public void receiveDamage(double damage) {
-        damage -= this.armorValue;
-        super.receiveDamage(damage);
+        double effectiveDamage = damage - this.armorValue;
+        if (effectiveDamage < 0) effectiveDamage = 0;
+        System.out.println(getName() + "'s armor blocked " + armorValue + " damage.");
+        super.receiveDamage(effectiveDamage);
     }
 
     @Override
-    public void attack(Character character) {
+    public void attack(Character target) {
+        double rawDamage = ((getWeapon().getBaseDamage() + getDamage()) * 1.5);
+        double totalDamage = rawDamage - target.getDefense();
+        if (totalDamage < 0) totalDamage = 0;
+        System.out.println(getName() + " Warrior Attack! (1.5x Damage Bonus)");
+        target.receiveDamage(totalDamage);
+    }
 
+    @Override
+    public void displayCharacterDetails() {
+        super.displayCharacterDetails();
+        System.out.println("Special Attribute: Armor Value = " + armorValue);
+        System.out.println();
     }
 
 }

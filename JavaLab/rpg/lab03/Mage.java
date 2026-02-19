@@ -15,5 +15,16 @@ public class Mage extends Character{
         this.mana = mana;
     }
 
+    @Override
+    public void attack(Character target) {
+        System.out.println(getName() + " casts 'Magic Missile' spell! ");
+        super.attack(target);
+    }
 
+    @Override
+    public void displayCharacterDetails() {
+        super.displayCharacterDetails();
+        System.out.println("Special Attribute: Mana = " + mana);
+        System.out.println();
+    }
 }

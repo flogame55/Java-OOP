@@ -7,23 +7,16 @@ public class LibraryItem {
     private String title;
     private String author;
     private String isbn;
-    private double price;
     private String status;
     private LocalDate returnDueDate;
-    private int bookId;
 
-    public LibraryItem(String title, String author, String isbn, double price, String status){
+
+    public LibraryItem(String title, String author, String isbn, String status){
         this.title = title;
         this.author = author;
         this.isbn = isbn;
-        this.price = price;
         this.status = status;
-        this.bookId = (int) (Math.random() * 100);
     }
-
-    public int getBookId() {return bookId;}
-
-    public void setBookId(int bookId) {this.bookId = bookId;}
 
     public String getAuthor() {
         return author;
@@ -49,14 +42,6 @@ public class LibraryItem {
         this.isbn = isbn;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -77,7 +62,6 @@ public class LibraryItem {
         System.out.println("- Title: " + title);
         System.out.println("- Author: " + author);
         System.out.println("- Isbn: " + isbn);
-        System.out.println("- Price: " + price);
         System.out.println("- Status: " + status);
         if (returnDueDate == null){
             System.out.println("- Return Due Date: N/A (Book is available)");
@@ -87,12 +71,12 @@ public class LibraryItem {
     }
 
     public void printSummary(){
-        System.out.println("Book[Title='"+title+"' , Status='"+status+"']");
+        System.out.println("Item[Title='"+title+"' , Status='"+status+"']");
     }
 
     public void checkOut(Member member){
         if (status.equalsIgnoreCase("Borrowed")){
-            System.out.println("Error: Book '" + title + "' is already borrowed and cannot be checked out again.");
+            System.out.println("Error: Item '" + title + "' is already borrowed and cannot be checked out again.");
             return;
         }
         if (member.getBorrowTime() >= 3){
@@ -103,20 +87,24 @@ public class LibraryItem {
         setStatus("Borrowed");
         member.setBorrowTime(member.getBorrowTime() + 1);
         this.returnDueDate = LocalDate.now().plusDays(14);
-        System.out.println("Book '" + title + "' has been checked out successfully.");
-        System.out.println("Book '" + title + "' has been borrwed by ["+member.getMemberName()+"]");
+        System.out.println("Item '" + title + "' has been checked out successfully.");
+        System.out.println("Item '" + title + "' has been borrwed by ["+member.getMemberName()+"]");
         System.out.println("Return Due Date: " + returnDueDate);
     }
 
-    public void returnBook(Member member){
+    public void returnItem(Member member){
         if (status.equalsIgnoreCase("Available")){
-            System.out.println("Error: Book '" + title + "' is Available and be checked out.");
+            System.out.println("Error: Item '" + title + "' is Available and be checked out.");
             return;
         }
         member.setBorrowTime(member.getBorrowTime() - 1);
         setStatus("Available");
         this.returnDueDate = null;
-        System.out.println("Book '" + title + "' has been returned successfully.");
+        System.out.println("Item '" + title + "' has been returned successfully.");
 
+    }
+
+    public double calculateLateFee(int daysLate){
+        return daysLate * 5.0 ;
     }
 }

@@ -9,7 +9,7 @@ public class Character {
     private double defense;
     private Weapon weapon;
     private String characterClass;
-    private String staus;
+    private String status;
 
     public Character(String name, int level, int maxHealthPoints,int damage,int defense ,Weapon weapon, String characterClass) {
         this.name = name;
@@ -20,7 +20,7 @@ public class Character {
         this.defense = defense;
         this.weapon = weapon;
         this.characterClass = characterClass;
-        this.staus = "Active";
+        this.status = "Active";
     }
 
     public Weapon getWeapon() {
@@ -79,60 +79,55 @@ public class Character {
 
     public void setDefense(int defense) {this.defense = defense;}
 
-    public String getStaus() {return staus;}
+    public String getStaus() {return status;}
 
-    public void setStaus(String staus) {this.staus = staus;}
+    public void setStaus(String staus) {this.status = staus;}
 
     public void displayCharacterDetails() {
         System.out.println("--- "+name+" ---");
         System.out.println("Class: "+characterClass);
         isAlive();
-        System.out.println("Status: "+staus);
+        System.out.println("Status: "+status);
         System.out.println("Level: "+level);
         System.out.println("Health Points : "+healthPoints+"/"+maxHealthPoints);
         System.out.println("Damage: "+damage);
         System.out.println("Defense: "+defense);
         System.out.println("Weapon: "+ weapon.toString());
-        System.out.println();
     }
 
-    public boolean isAlive(){
-        boolean out;
-        if(healthPoints > 0){
-            out = true;
-            staus = "Active";
-        }else {
-            out = false;
-            staus = "Fainted";
+    public boolean isAlive() {
+        if (healthPoints > 0) {
+            this.status = "Active";
+            return true;
+        } else {
+            healthPoints = 0;
+            this.status = "Fainted";
+            return false;
         }
-        return out;
     }
 
     public void receiveDamage(double damage) {
-        healthPoints -= damage;
-        if (healthPoints < 0){
-            healthPoints = 0;
+        this.healthPoints -= damage;
+        if (this.healthPoints <= 0) {
+            this.healthPoints = 0;
+            this.status = "Fainted";
         }
         System.out.println(name+" Takes "+ damage +"! Current Hp: "+healthPoints+"/"+maxHealthPoints);
     }
 
-    public void attack(Character character) {
-        int rawdamage = (int) (weapon.getBaseDamage() + this.damage);
-        double totaldamage = rawdamage - character.getDefense();
-        if (!character.isAlive()){
+    public void attack(Character target) {
+        if (!target.isAlive()) {
             System.out.println("Target is already Fainted Attack won't work!");
             return;
         }
-        character.setHealthPoints(character.getHealthPoints() - totaldamage);
-        System.out.println("Raw Attack Damage : "+ rawdamage);
-        System.out.println(character.getName()+"'s Defense : "+ character.getDefense() + "(reduces damage by "+ character.getDefense()+")");
-        System.out.println("Actual Damage Taken: "+ totaldamage);
-        if (character.getHealthPoints() <= 0){ //check hp less 0 will set to 0 and set status to Fainted
-            character.setHealthPoints(0);
-            character.setStaus("Fainted");
-        }
-        System.out.println(character.getName()+"'s HP: "+ character.getHealthPoints()+"/"+character.getMaxHealthPoints());
-
+        double rawDamage = this.weapon.getBaseDamage() + this.damage;
+        double actualDamage = rawDamage - target.getDefense();
+        if (actualDamage < 0) actualDamage = 0;
+        System.out.println("Raw Attack Damage : "+ rawDamage);
+        System.out.println(target.getName()+"'s Defense : "+ target.getDefense() + "(reduces damage by "+ target.getDefense()+")");
+        System.out.println("Actual Damage Taken: "+ actualDamage);
+        System.out.println(target.getName()+"'s HP: "+ target.getHealthPoints()+"/"+target.getMaxHealthPoints());
+        target.receiveDamage(actualDamage);
 
     }
 
