@@ -1,47 +1,22 @@
 package com.rpg.lab04;
 
 public class Healer extends Character {
-    private int healBase;
-    private int healPower;
+    private String healType;
 
-    public Healer(String name, int level, int maxHealthPoints,int damage,int defense, Weapon weapon, int healBase) {
-        super(name, level, maxHealthPoints, damage , defense ,weapon, "Healer");
-        this.healBase = healBase;
-        this.healPower = healBase + (getLevel() * 2);
+    // แก้ไข Constructor ให้รับค่าและส่ง super() ให้ตรงกับ Character.java
+    public Healer(String name, int level, double hp, double damage, int defense, Weapon weapon, String healType) {
+        // ลำดับต้องเป็น: name, level, hp, damage, defense, weapon
+        super(name, level, hp, damage, defense, weapon);
+        this.healType = healType;
     }
 
-    public int getHealBase() {return healBase;}
-
-    public void setHealBase(int healBase) {this.healBase = healBase;}
-
-    public void heal() {
-        if (getHealthPoints() >= getMaxHealthPoints()) {
-            System.out.println("HealthPoints is already Full!");
+    @Override
+    public void attack(Destructible target) {
+        if (target.isDestroyed()) {
+            System.out.println("Target is already destroyed!");
             return;
         }
-        double newHp = getHealthPoints() + healPower;
-        setHealthPoints(newHp);
-        if (getHealthPoints() >= getMaxHealthPoints()) {
-            setHealthPoints(getMaxHealthPoints());
-        }
-        System.out.println(getName()+" ("+ getClass() + ") casts a healing spell!");
-        System.out.println("Healing Amount: " + healPower + " ( Base: "+ healBase + " + "+"Level Bonus: "+ (getLevel() * 2)+")");
-        System.out.println("Restored: " + healPower + " HP!  Current HP: " + getHealthPoints()+"/"+getMaxHealthPoints());
-    }
-
-    public void healAlly(Character character) {
-        if (character.getHealthPoints() >= character.getMaxHealthPoints()) {
-            System.out.println("Target HealthPoints is already Full!");
-            return;
-        }
-        double newHp = character.getHealthPoints() + healPower;
-        character.setHealthPoints(newHp);
-        if (character.getHealthPoints() >= character.getMaxHealthPoints()) {
-            character.setHealthPoints(character.getMaxHealthPoints());
-        }
-        System.out.println(getName() + " ( " + getCharacterClass() + " ) casts a healing spell on " + character.getName() + "!");
-        System.out.println("Healing Amount: " + healPower);
-        System.out.println("Restored: " + healPower + " HP To  " + character.getName() + "! Their HP is : " + character.getHealthPoints());
-
+        System.out.println(getName() + " (Healer) uses " + healType + " to push back the target!");
+        super.attack(target); // ใช้แรงโจมตีพื้นฐานจากคลาสแม่
     }
 }

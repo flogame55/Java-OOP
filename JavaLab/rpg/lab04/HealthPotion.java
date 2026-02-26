@@ -1,42 +1,28 @@
 package com.rpg.lab04;
 
-public class HealthPotion implements  Consumable{
+public class HealthPotion implements Consumable {
     private String name;
-    private int healthPower;
-    private int quantity;
+    private double healAmount;
+    private int uses;
 
-    public HealthPotion(String name, int healthPower , int quantity) {
-        this.healthPower = healthPower;
+    public HealthPotion(String name, double healAmount, int uses) {
         this.name = name;
-        this.quantity = quantity;
-    }
-
-    public int getHealthPower() {
-        return healthPower;
-    }
-
-    public void setHealthPower(int healthPower) {
-        this.healthPower = healthPower;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        this.healAmount = healAmount;
+        this.uses = uses;
     }
 
     @Override
     public void use(Character user) {
+        if (uses > 0) {
+            user.setHealthPoints(user.getHealthPoints() + healAmount);
+            uses--;
+            System.out.println(user.getName() + " used " + name + " and healed " + healAmount + " HP!");
+        } else {
+            System.out.println(name + " is empty!");
+        }
+    }
 
+    public void displayPotionDetails() {
+        System.out.println("Potion: " + name + " | Heal: " + healAmount + " | Uses left: " + uses);
     }
 }

@@ -1,53 +1,18 @@
 package com.rpg.lab04;
 
 public class Weapon {
-    private  String name;
-    private  String type;
+    private String name;
+    private String type;
     private int baseDamage;
-    private   String ability;
+    private String description;
 
-    public Weapon(String type, String name, int baseDamage, String ability) {
-        this.type = type;
+    public Weapon(String name, String type, int baseDamage, String description) {
         this.name = name;
-        this.baseDamage = baseDamage;
-        this.ability = ability;
-    }
-
-    public int getBaseDamage() {
-        return baseDamage;
-    }
-
-    public void setBaseDamage(int baseDamage) {
-        this.baseDamage = baseDamage;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
         this.type = type;
+        this.baseDamage = baseDamage;
+        this.description = description;
     }
 
-    public String getAbility() {
-        return ability;
-    }
-
-    public void setAbility(String ability) {
-        this.ability = ability;
-    }
-
-    @Override
-    public String toString(){
-        return name +" ("+"Type: "+type+", Damage: " + baseDamage+", Ability: " +ability+" )";
-    }
-
+    public int getBaseDamage() { return baseDamage; }
+    public String getName() { return name; }
 }

@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/lab01" isTestSource="false" packagePrefix="com.rpg.lab01" />
       <sourceFolder url="file://$MODULE_DIR$/lab02" isTestSource="false" packagePrefix="com.rpg.lab02" />
       <sourceFolder url="file://$MODULE_DIR$/lab03" isTestSource="false" packagePrefix="com.rpg.lab03" />
+      <sourceFolder url="file://$MODULE_DIR$/lab04" isTestSource="false" packagePrefix="com.rpg.lab04" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

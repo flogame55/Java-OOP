@@ -1,7 +1,6 @@
 package com.rpg.lab04;
 
 public interface Destructible {
-    void takeDamage(int amount);
-
+    void takeDamage(double amount);
     boolean isDestroyed();
 }

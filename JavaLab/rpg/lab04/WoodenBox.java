@@ -1,40 +1,39 @@
 package com.rpg.lab04;
 
-public class WoodenBox implements Destructible{
+public class WoodenBox implements Destructible {
     private String name;
-    private int health;
-    private boolean status;
-    private String reward;
+    private double healthPoints;
+    private boolean isLocked;
+    private String content;
 
-    public WoodenBox(String name,int health , boolean status, String reward) {
-        this.reward = reward;
-        this.status = status;
-        this.health = health;
+    public WoodenBox(String name, double hp, boolean isLocked, String content) {
         this.name = name;
+        this.healthPoints = hp;
+        this.isLocked = isLocked;
+        this.content = content;
     }
 
-    public String getReward() {
-        return reward;
+    @Override
+    public void takeDamage(double amount) {
+        this.healthPoints -= amount;
+        System.out.println(name + " takes " + amount + " damage. Box HP: " + (healthPoints > 0 ? healthPoints : 0));
     }
 
-    public void setReward(String reward) {
-        this.reward = reward;
+    @Override
+    public boolean isDestroyed() {
+        return healthPoints <= 0;
     }
 
-    public boolean isStatus() {
-        return status;
+    public void displayBoxDetails() {
+        System.out.println("Object: " + name + " | HP: " + healthPoints + " | Locked: " + isLocked);
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
+    public void breakOpen() {
+        if (isDestroyed()) {
+            System.out.println("Box broke open! Found: " + content);
+        } else {
+            System.out.println("The box is still intact and cannot be opened.");
+        }
     }
 
     public String getName() {
@@ -43,15 +42,5 @@ public class WoodenBox implements Destructible{
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public void takeDamage(int amount) {
-
-    }
-
-    @Override
-    public boolean isDestroyed() {
-        return false;
     }
 }
