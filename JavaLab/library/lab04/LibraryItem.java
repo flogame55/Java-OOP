@@ -8,6 +8,7 @@ public class LibraryItem {
     private String author;
     private String isbn;
     private String status;
+    private double price;
     private LocalDate returnDueDate;
 
 
@@ -102,6 +103,20 @@ public class LibraryItem {
         this.returnDueDate = null;
         System.out.println("Item '" + title + "' has been returned successfully.");
 
+    }
+
+    public void printStatusAfter() {
+        if (this instanceof PhysicalBook) {
+            PhysicalBook pb = (PhysicalBook) this;
+            System.out.println("PhysicalBook[Title='" + title + "', Location='" + pb.getShelfLocation() + "', Status='" + getStatus() + "']");
+        } else if (this instanceof EBook) {
+            EBook eb = (EBook) this;
+            System.out.println("EBook[Title='" + title + "', Size='" + eb.getFileSize() + "0 MB', Status='" + getStatus() + "']");
+        }
+    }
+
+    public double getPrice() {
+        return 0.0;
     }
 
     public double calculateLateFee(int daysLate){
