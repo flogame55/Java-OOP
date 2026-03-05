@@ -97,10 +97,11 @@ public class LibraryItem {
 
         setStatus("Borrowed");
         member.setBorrowTime(member.getBorrowTime() + 1);
-        this.returnDueDate = LocalDate.now().plusDays(14);
-        System.out.println("Item '" + title + "' has been checked out successfully.");
-        System.out.println("Item '" + title + "' has been borrwed by ["+member.getMemberName()+"]");
-        System.out.println("Return Due Date: " + returnDueDate);
+        this.returnDueDate = LocalDate.now().plusDays(member.getMembershipStrategy().getLoanPeriodDays());
+        System.out.println("✅ Item '" + title + "' has been checked out successfully.");
+        System.out.println("📖 Borrowed by "+member.getMemberName() + " ("+member.getMembershipStrategy().getMembershipType()+")");
+        System.out.println("📅 Loan Period: "+ member.getMembershipStrategy().getLoanPeriodDays());
+        System.out.println("📅Return Due Date: " + returnDueDate);
     }
 
     public void returnItem(Member member){

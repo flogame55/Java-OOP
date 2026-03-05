@@ -16,6 +16,7 @@ package com.library.lab05;
  *
  * Similar to SimUDuck's FlyBehavior and QuackBehavior!
  */
+
 public interface MembershipStrategy {
     int getBorrowLimit();
     int getLoanPeriodDays();

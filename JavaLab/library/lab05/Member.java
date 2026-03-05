@@ -13,6 +13,7 @@ public class Member {
         this.membershipStrategy = membershipStrategy;
     }
 
+
     public String getMemberName() {
         return memberName;
     }
